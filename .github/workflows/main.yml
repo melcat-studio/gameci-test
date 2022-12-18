@@ -104,21 +104,34 @@ jobs:
           name: build
           path: build/Android/Android.apk
 
-  deployPages:
+  notify:
     needs: buildAndroid
-    name: Deploy to Github Pages 🚀
     runs-on: ubuntu-latest
+    if: always()
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - uses: actions/download-artifact@v2
+    - name: Send a Notification
+        id: notify
+        uses: thechetantalwar/teams-notify@v2
         with:
-          name: build
-          path: build
+        teams_webhook_url: ${{ secrets.TEAMS_WEBHOCK }}
+        message: "Github Action Build Number ${{ github.run_number }} Completed and the outcome is  ${{ needs.build.result }}."
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: main
-          folder: build
+  # deployPages:
+    # needs: buildAndroid
+    # name: Deploy to Github Pages 🚀
+    # runs-on: ubuntu-latest
+    # steps:
+      # - name: Checkout code
+        # uses: actions/checkout@v2
+
+      # - uses: actions/download-artifact@v2
+        # with:
+          # name: build-Android
+          # path: build
+
+      # - name: Deploy 🚀
+        # uses: JamesIves/github-pages-deploy-action@4.1.4
+        # with:
+          # branch: build
+          # folder: build
