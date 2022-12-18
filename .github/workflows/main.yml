@@ -110,11 +110,15 @@ jobs:
     if: always()
     
     steps:
-      - name: Send a Notification
-        uses: thechetantalwar/teams-notify@v2
+      - name: Send a message to Microsoft Teams
+        uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
-        teams_webhook_url: ${{ secrets.TEAMS_WEBHOCK }}
-        message: "Github Action Build Number ${{ github.run_number }} Completed and the outcome is  ${{ needs.build.result }}."
+          webhook_uri: ${{ secrets.TEAMS_WEBHOCK }}
+          title: "GITHUB CI/CD"
+          summary: "Github CI Result"
+          text: "Github Action Build Number ${{ github.run_number }} Completed and the outcome is  ${{ needs.build.result }}."
+          sections: '[{ "activityTitle": "hello world" }, { ... }]'
+          actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": "https://localhost" }] }, { ... }]'
 
   # deployPages:
     # needs: buildAndroid
