@@ -117,8 +117,6 @@ jobs:
           title: "GITHUB CI/CD"
           summary: "Github CI Result"
           text: "Github Action Build Number ${{ github.run_number }} Completed and the outcome is  ${{ needs.build.result }}."
-          sections: '[{ "activityTitle": "hello world" }, { ... }]'
-          actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": "https://localhost" }] }, { ... }]'
 
   # deployPages:
     # needs: buildAndroid
