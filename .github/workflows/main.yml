@@ -101,8 +101,8 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: build-Android
-          path: build/Android
+          name: build
+          path: build/Android/Android.apk
 
   deployPages:
     needs: buildAndroid
@@ -114,11 +114,11 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          name: build-Android
+          name: build
           path: build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          branch: gh-pages
-          folder: build/Android
+          branch: main
+          folder: build
